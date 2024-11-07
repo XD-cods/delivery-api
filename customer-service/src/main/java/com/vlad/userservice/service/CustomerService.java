@@ -7,6 +7,7 @@ import com.vlad.userservice.persistence.repository.CustomerRepository;
 import com.vlad.userservice.util.mapper.CustomerMapper;
 import com.vlad.userservice.web.request.CustomerRequest;
 import com.vlad.userservice.web.response.CustomerResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class CustomerService {
   private static final String NOT_FOUND_MESSAGE = "Customer not found by id: %d";
   public static final String CONFLICT_MESSAGE = "Customer with id: %s already exists";
 
+  @Transactional
   public CustomerResponse getCustomer(Long customerId) {
     Customer customer = customerRepository.findById(customerId)
             .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
@@ -30,6 +32,7 @@ public class CustomerService {
     return customerMapper.customerToCustomerResponse(customer);
   }
 
+  @Transactional
   public List<CustomerResponse> getCustomers() {
     return customerRepository
             .findAll()
@@ -38,6 +41,7 @@ public class CustomerService {
             .toList();
   }
 
+  @Transactional
   public CustomerResponse createCustomer(CustomerRequest customerRequest) {
     Customer customer = customerMapper.customerRequestToCustomer(customerRequest);
 
@@ -50,6 +54,7 @@ public class CustomerService {
     return customerMapper.customerToCustomerResponse(customer);
   }
 
+  @Transactional
   public CustomerResponse updateCustomer(Long customerId, CustomerRequest customerRequest) {
     customerRepository.findById(customerId)
             .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
@@ -59,6 +64,7 @@ public class CustomerService {
     return customerMapper.customerToCustomerResponse(customer);
   }
 
+  @Transactional
   public Boolean deleteCustomer(Long customerId) {
     customerRepository.findById(customerId)
                     .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
