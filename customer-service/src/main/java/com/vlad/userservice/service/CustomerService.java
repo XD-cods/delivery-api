@@ -29,7 +29,7 @@ public class CustomerService {
     Customer customer = customerRepository.findById(customerId)
             .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
 
-    return customerMapper.customerToCustomerResponse(customer);
+    return customerMapper.mapCustomerToCustomerResponse(customer);
   }
 
   @Transactional
@@ -37,13 +37,13 @@ public class CustomerService {
     return customerRepository
             .findAll()
             .stream()
-            .map(customerMapper::customerToCustomerResponse)
+            .map(customerMapper::mapCustomerToCustomerResponse)
             .toList();
   }
 
   @Transactional
   public CustomerResponse createCustomer(CustomerRequest customerRequest) {
-    Customer customer = customerMapper.customerRequestToCustomer(customerRequest);
+    Customer customer = customerMapper.mapCustomerRequestToCustomer(customerRequest);
 
     Optional<Customer> optionalCustomer = customerRepository.findByEmail(customer.getEmail());
     if (optionalCustomer.isPresent()) {
@@ -51,7 +51,7 @@ public class CustomerService {
     }
 
     customerRepository.save(customer);
-    return customerMapper.customerToCustomerResponse(customer);
+    return customerMapper.mapCustomerToCustomerResponse(customer);
   }
 
   @Transactional
@@ -59,15 +59,15 @@ public class CustomerService {
     customerRepository.findById(customerId)
             .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
 
-    Customer customer = customerMapper.customerRequestToCustomer(customerRequest);
+    Customer customer = customerMapper.mapCustomerRequestToCustomer(customerRequest);
     customerRepository.save(customer);
-    return customerMapper.customerToCustomerResponse(customer);
+    return customerMapper.mapCustomerToCustomerResponse(customer);
   }
 
   @Transactional
   public Boolean deleteCustomer(Long customerId) {
     customerRepository.findById(customerId)
-                    .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
+            .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
     customerRepository.deleteById(customerId);
     return true;
   }

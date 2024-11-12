@@ -1,4 +1,4 @@
-package com.vlad.userservice.persistence.entity;
+package com.vlad.orderservice.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

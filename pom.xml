@@ -20,11 +20,13 @@
     <developers>
         <developer/>
     </developers>
+    <packaging>pom</packaging>
     <modules>
         <module>eureka-server</module>
         <module>config-server</module>
         <module>api-gateway</module>
         <module>customer-service</module>
+        <module>order-service</module>
     </modules>
     <scm>
         <connection/>

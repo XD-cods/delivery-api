@@ -1,6 +1,5 @@
 package com.vlad.orderservice.persistence.entity;
 
-import com.vlad.userservice.persistence.entity.Customer;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +26,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "order")
+@Table(name = "order", schema = "public")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
