@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: order-service
+
+  config:
+    import: "configserver:"
+
+  #  kafka:
+  #    producer:
+  #      bootstrap-servers: 9092
+  #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+  #      value-serializer: com.fasterxml.jackson.databind.JsonSerializer
+  #      retries: 3
+  kafka:
+    bootstrap-servers: localhost:9092

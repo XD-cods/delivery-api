@@ -13,11 +13,11 @@ public class CustomerMapper {
 
   private final ModelMapper modelMapper;
 
-  public Customer customerRequestToCustomer(CustomerRequest customerRequest) {
+  public Customer mapCustomerRequestToCustomer(CustomerRequest customerRequest) {
     return modelMapper.map(customerRequest, Customer.class);
   }
 
-  public CustomerResponse customerToCustomerResponse(Customer customer) {
+  public CustomerResponse mapCustomerToCustomerResponse(Customer customer) {
     return modelMapper.map(customer, CustomerResponse.class);
   }
 

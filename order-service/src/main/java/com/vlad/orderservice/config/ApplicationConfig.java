@@ -1,14 +1,13 @@
-package com.vlad.userservice.config;
+package com.vlad.orderservice.config;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@OpenAPIDefinition
 public class ApplicationConfig {
+
   @Bean
   public ModelMapper modelMapper() {
 
