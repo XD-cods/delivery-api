@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,7 +32,6 @@ public class Menu {
   private String name;
 
   @Builder.Default
-  @OneToMany
-  @JoinColumn(name = "menu_item_id")
+  @OneToMany(mappedBy = "menu")
   private List<MenuItem> menuItems = new ArrayList<>();
 }

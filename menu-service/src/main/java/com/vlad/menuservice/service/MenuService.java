@@ -29,7 +29,7 @@ public class MenuService {
   @Transactional
   public MenuResponse getMenuById(Long id) {
     return menuMapper.mapMenuToMenuResponse(menuRepository.findById(id)
-            .orElseThrow(()->new NotFoundException(String.format(NOT_FOUND_BY_ID_MESSAGE, id))));
+            .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_BY_ID_MESSAGE, id))));
   }
 
   @Transactional
@@ -55,7 +55,7 @@ public class MenuService {
   @Transactional
   public MenuResponse updateMenu(Long id, MenuRequest menuRequest) {
     Menu existMenu = menuRepository.findById(id)
-            .orElseThrow(()->new NotFoundException(String.format(NOT_FOUND_BY_ID_MESSAGE, id)));
+            .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_BY_ID_MESSAGE, id)));
 
     menuMapper.updateExistMenu(existMenu, menuRequest);
     menuRepository.save(existMenu);
@@ -65,7 +65,7 @@ public class MenuService {
   @Transactional
   public Boolean deleteMenu(Long id) {
     menuRepository.findById(id)
-            .orElseThrow(()->new NotFoundException(String.format(NOT_FOUND_BY_ID_MESSAGE, id)));
+            .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_BY_ID_MESSAGE, id)));
 
     menuRepository.deleteById(id);
     return true;
