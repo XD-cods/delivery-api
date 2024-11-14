@@ -20,4 +20,8 @@ public class OrderMapper {
   public Order mapOrderRequestToOrder(OrderRequest orderRequest) {
     return modelMapper.map(orderRequest, Order.class);
   }
+
+  public void updateExistOrder(OrderRequest orderRequest, Order order) {
+    modelMapper.map(orderRequest, order);
+  }
 }
