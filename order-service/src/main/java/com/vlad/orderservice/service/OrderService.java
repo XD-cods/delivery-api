@@ -44,17 +44,19 @@ public class OrderService {
 
   @Transactional
   public OrderResponse updateOrder(Long id, OrderRequest orderRequest) {
-    Order order = orderRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format(ORDER_NOT_FOUND, id)));
+    Order existOrder = orderRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException(String.format(ORDER_NOT_FOUND, id)));
 
-    order = orderMapper.mapOrderRequestToOrder(orderRequest);
-    order = orderRepository.save(order);
-    kafkaSender.send("order-updated", order);
-    return orderMapper.mapOrderToOrderResponse(order);
+    orderMapper.updateExistOrder(orderRequest, existOrder);
+    orderRepository.save(existOrder);
+    kafkaSender.send("order-updated", existOrder);
+    return orderMapper.mapOrderToOrderResponse(existOrder);
   }
 
   @Transactional
   public Boolean deleteOrder(Long id) {
-    orderRepository.findById(id).orElseThrow(() -> new NotFoundException(String.format(ORDER_NOT_FOUND, id)));
+    orderRepository.findById(id)
+            .orElseThrow(() -> new NotFoundException(String.format(ORDER_NOT_FOUND, id)));
     orderRepository.deleteById(id);
     return true;
   }

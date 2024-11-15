@@ -56,12 +56,12 @@ public class CustomerService {
 
   @Transactional
   public CustomerResponse updateCustomer(Long customerId, CustomerRequest customerRequest) {
-    customerRepository.findById(customerId)
+    Customer existCustomer = customerRepository.findById(customerId)
             .orElseThrow(() -> new NotFoundException(String.format(NOT_FOUND_MESSAGE, customerId)));
 
-    Customer customer = customerMapper.mapCustomerRequestToCustomer(customerRequest);
-    customerRepository.save(customer);
-    return customerMapper.mapCustomerToCustomerResponse(customer);
+    customerMapper.updateExistCustomer(existCustomer, customerRequest);
+    customerRepository.save(existCustomer);
+    return customerMapper.mapCustomerToCustomerResponse(existCustomer);
   }
 
   @Transactional

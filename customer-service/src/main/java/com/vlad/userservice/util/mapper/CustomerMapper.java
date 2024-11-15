@@ -21,5 +21,8 @@ public class CustomerMapper {
     return modelMapper.map(customer, CustomerResponse.class);
   }
 
+  public void updateExistCustomer(Customer customer, CustomerRequest customerRequest) {
+    modelMapper.map(customer, customerRequest);
+  }
 
 }
